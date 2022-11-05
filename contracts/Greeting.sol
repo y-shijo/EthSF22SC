@@ -16,6 +16,20 @@ contract TheGreeting is
         return campaigns;
     }
 
+    // The user can get a list of <CampaignAddress, CampaignName> for available campaigns.
+    function getCampaignListAndName() external view override returns (ICampaign[] memory, string[] memory) {
+        uint numCampaigns = campaigns.length;
+        ICampaign[] memory _campaigns = new ICampaign[](numCampaigns);
+        string[] memory _name = new string[](numCampaigns);
+
+        for (uint i = 0; i < numCampaigns; i++) {
+            _campaigns[i] = campaigns[i];
+            _name[i] = campaigns[i].name();
+        }
+
+        return (_campaigns, _name);
+    }
+
     // The user can get a list of available words for a campaign.
     function getGreetingWordList(
         ICampaign campaign

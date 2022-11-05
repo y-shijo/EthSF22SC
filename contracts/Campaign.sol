@@ -68,6 +68,13 @@ contract Campaign is
     }
 
     /**
+     * @dev Get a campaignName
+     */
+    function name() public view virtual override(ICampaign, ERC721) returns (string memory) {
+        return ERC721.name();
+    }
+
+    /**
      * @dev Get List of Greeting Words
      */
     function getGreetingWordList() external view virtual override returns (string[] memory) {

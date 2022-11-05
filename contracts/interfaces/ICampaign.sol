@@ -41,6 +41,8 @@ interface ICampaign is
         bool isResonanced;
     }
 
+    function name() external view returns (string memory);
+
     /**
      * @dev Get List of Greeting Words
      */

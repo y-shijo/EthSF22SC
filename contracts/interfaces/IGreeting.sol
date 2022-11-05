@@ -7,6 +7,9 @@ interface IGreeting {
     // The user can get a list of available campaigns.
     function getCampaignList() external view returns (ICampaign[] memory);
 
+    // The user can get a list of <CampaignAddress, CampaignName> for available campaigns.
+    function getCampaignListAndName() external view returns (ICampaign[] memory, string[] memory);
+
     // The user can get a list of available words for a campaign.
     function getGreetingWordList(
         ICampaign campaign
