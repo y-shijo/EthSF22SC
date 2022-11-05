@@ -1,10 +1,9 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-
 // TODO: Revisit and Improve overall interface design. (Especially, it's alinged with Campaign implementation.)
-interface ICampaign is IERC721 {
+// TODO: Write code comments
+interface ICampaign {
     enum MessageStatus {
         WAITING_FOR_REPLY,
         REPLIED
