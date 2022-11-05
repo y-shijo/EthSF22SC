@@ -197,7 +197,8 @@ contract Campaign is
         override(ERC721, ERC721Enumerable)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return interfaceId == type(ICampaign).interfaceId ||
+      super.supportsInterface(interfaceId);
     }
 
     function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
