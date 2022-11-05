@@ -91,7 +91,7 @@ contract Campaign is
     /**
      * @dev Get List of Greeting Words for a certain sender.
      */
-    function getSelectedGreetingWord(address sender) external view returns (uint, string memory) {
+    function getSelectedGreetingWord(address sender) external view virtual override returns (uint, string memory) {
         uint index = selectedWordId[sender];
         string memory word = greetingWords[index];
 
