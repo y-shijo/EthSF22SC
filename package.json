@@ -1,0 +1,11 @@
+{
+  "name": "EthSF22SC",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:y-shijo/EthSF22SC.git",
+  "author": "Yoshinobu Shijo <yoshinobushijo02264@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^2.12.2"
+  }
+}
