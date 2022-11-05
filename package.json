@@ -6,7 +6,10 @@
   "author": "Yoshinobu Shijo <yoshinobushijo02264@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.1",
+    "@nomiclabs/hardhat-etherscan": "^3.1.2",
     "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
     "hardhat": "^2.12.2"
   }
 }
