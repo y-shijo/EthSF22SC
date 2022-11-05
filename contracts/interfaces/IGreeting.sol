@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.0;
 
 import "./ICampaign.sol";
 
@@ -31,12 +31,18 @@ interface IGreeting {
         string memory messageURI
     ) external payable;
 
-    // The user can get messages within a campaign
-    function getMessagesOfCampaign(
+    // The user can get message IDs of Campaign
+    function getMessageIdsOfCampaign(
         address campaign,
         address who,
         ICampaign.MessageType action
-    ) external view returns (ICampaign.MessageResponseDto[] memory);
+    ) external view returns (uint[] memory);
+
+    // The user can get message by ID
+    function getMessageByIdOfCampaign(
+        address campaign,
+        uint id
+    ) external view returns (ICampaign.MessageResponseDto memory);
 
     // The user can register new campaign
     function registerCampaign(

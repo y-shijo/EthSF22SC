@@ -1,11 +1,11 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 interface ICampaign is IERC721 {
     enum MessageStatus {
-        WAITIN_FOR_REPLY,
+        WAITING_FOR_REPLY,
         REPLIED
     }
     
@@ -20,7 +20,7 @@ interface ICampaign is IERC721 {
         address recipient;
         string greetingWord;
         string bodyURI;
-        MessageStatus starus;
+        MessageStatus status;
         bool isResonanced;
     }
 
@@ -34,10 +34,14 @@ interface ICampaign is IERC721 {
         string memory messageURI
     ) external;
 
-    function getMessagess(
+    function getMessageIds(
         address who,
         MessageType action
-    ) external view returns (MessageResponseDto[] memory);
+    ) external view returns (uint[] memory);
 
-    function onRegistered() external view returns (string memory);
+    function getMessageById(
+        uint id
+    ) external view returns (MessageResponseDto memory);
+
+    function onRegistered() external pure returns (string memory);
 }
