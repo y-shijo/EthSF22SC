@@ -9,7 +9,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "./interfaces/ICampaign.sol";
 
-// TOOD: ERC721 should be converted to ERC721Enumerable and ERC721Storage
 contract Campaign is 
     ICampaign,
     ERC721Enumerable,
@@ -195,7 +194,7 @@ contract Campaign is
         public
         view
         virtual
-        override(IERC165, ERC721, ERC721Enumerable)
+        override(ERC721, ERC721Enumerable)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);
