@@ -18,6 +18,13 @@ interface IGreeting {
         uint wordIndex
     ) external;
 
+    // The user can get a selected word
+    function getSelectedGreetingWord(
+        ICampaign campaign,
+        address sender
+    ) external view returns (uint, string memory);
+
+
     // The user can get price in Wei per message for a campaign
     function getPricePerMessageInWei(
         ICampaign campaign

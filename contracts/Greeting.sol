@@ -28,9 +28,17 @@ contract TheGreeting is
         ICampaign campaign,
         uint wordIndex
     ) external override {
-        campaign.selectGreetingWord(wordIndex);
+        campaign.selectGreetingWord(msg.sender, wordIndex);
     }
 
+    // The user can get a selected word
+    function getSelectedGreetingWord(
+        ICampaign campaign,
+        address sender
+    ) external view override returns (uint, string memory) {
+        return campaign.getSelectedGreetingWord(sender);
+    }
+    
     // The user can get price in Wei per message for a campaign
     function getPricePerMessageInWei(
         ICampaign campaign
@@ -80,6 +88,7 @@ contract TheGreeting is
             ICampaign(campaign_).supportsInterface(type(ICampaign).interfaceId),
             "Err: The given address does not comply with ICampaign."
         );
+        // TODO: to check not to register the same campaign.
 
         campaigns.push(ICampaign(campaign_));
     }
