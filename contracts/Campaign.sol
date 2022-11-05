@@ -194,7 +194,7 @@ contract Campaign is
         public
         view
         virtual
-        override(ERC721, ERC721Enumerable)
+        override(IERC165, ERC721, ERC721Enumerable)
         returns (bool)
     {
         return interfaceId == type(ICampaign).interfaceId ||

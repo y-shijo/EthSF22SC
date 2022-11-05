@@ -1,7 +1,11 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-interface ICampaign {
+import "@openzeppelin/contracts/interfaces/IERC165.sol";
+
+interface ICampaign is
+    IERC165
+{
     // Message Status
     //  - WAITING_FOR_REPLY: Sender sent a message, but a recipient does not reply.
     //  - REPLIED: Sender and Recipient sent a message each other.
