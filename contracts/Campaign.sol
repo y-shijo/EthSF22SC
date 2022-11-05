@@ -78,14 +78,15 @@ contract Campaign is
      * @dev Select the greeting Word for a caller.
      */
     function selectGreetingWord(
+        address sender_,
         uint wordIndex_
     ) external virtual override {
-        require(isWordSelected[msg.sender] == false, "Err: Word is already selected.");
+        require(isWordSelected[sender_] == false, "Err: Word is already selected.");
         require(wordIndex_ < greetingWords.length, "Err: The invalid word index.");
         require(wordIndex_ != 0, "Err: Cannot set word index to 0.");
 
-        selectedWordId[msg.sender] = wordIndex_;
-        isWordSelected[msg.sender] = true;
+        selectedWordId[sender_] = wordIndex_;
+        isWordSelected[sender_] = true;
     }
 
     /**

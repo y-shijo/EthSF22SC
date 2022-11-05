@@ -49,7 +49,7 @@ interface ICampaign is
     /**
      * @dev Select the greeting Word for a caller.
      */
-    function selectGreetingWord(uint wordIndex) external;
+    function selectGreetingWord(address sender, uint wordIndex) external;
     
     /**
      * @dev Get List of Greeting Words for a certain sender.
