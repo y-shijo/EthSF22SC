@@ -9,6 +9,7 @@ contract TheGreeting is
 {
     // List of Campaigns
     ICampaign[] campaigns;
+    mapping(ICampaign => bool) isCampaignRegistered;
 
 
     // The user can get a list of available campaigns.
@@ -102,7 +103,9 @@ contract TheGreeting is
             ICampaign(campaign_).supportsInterface(type(ICampaign).interfaceId),
             "Err: The given address does not comply with ICampaign."
         );
-        // TODO: to check not to register the same campaign.
+
+        require(!isCampaignRegistered[campaign_], "Err: The given campaign is alreaady registered.");
+        isCampaignRegistered[campaign_] = true;
 
         campaigns.push(ICampaign(campaign_));
     }
