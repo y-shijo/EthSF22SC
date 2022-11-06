@@ -75,13 +75,23 @@ contract TheGreeting is
         address to,
         string memory messageURI
     ) external payable override {
-        // TODO: Check whether the sender is the genuine human or not.
+        // Determine the price for sending message.
+        // If the humanity is verified, the user can send a message for free.
+        uint pricePerMessage  = campaign.getPricePerMessageInWei();
+        if(verifiedHumanity[msg.sender]) {
+            pricePerMessage = 0;
+        }
 
-        // TODO: Update the payment based on the sender identity.
+        // Check whether sufficient value is sent to the contract.
+        // Return the change to sender if any.
+        require(msg.value >= pricePerMessage, "Err: Insufficient msg.value to send message.");
+        uint change = msg.value - pricePerMessage;
+        payable(msg.sender).transfer(change);
 
         // Send a Message via Campaign.
         campaign.send(msg.sender, to, messageURI);
 
+        // Send Notification Via PushProtocol.
         _sendNotificationViaPush(to,
                                 campaign.name(), 
                                 "New greeting coming!"
