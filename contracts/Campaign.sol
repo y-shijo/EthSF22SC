@@ -175,7 +175,9 @@ contract Campaign is
         MessageStatus status = (isMessageSentFromSenderToRecipient[recipient][sender])
             ? MessageStatus.REPLIED 
             :  MessageStatus.WAITING_FOR_REPLY;
-        bool isResonanced = selectedWordId[sender] == selectedWordId[recipient];
+        bool isResonanced = (selectedWordId[sender] == selectedWordId[recipient]) 
+                            && isMessageSentFromSenderToRecipient[recipient][sender]
+                            && isMessageSentFromSenderToRecipient[sender][recipient];
         
         MessageResponseDto memory dto = MessageResponseDto(
             id_,
