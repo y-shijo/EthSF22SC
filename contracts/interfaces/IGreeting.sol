@@ -59,4 +59,11 @@ interface IGreeting {
         ICampaign campaign
     ) external;
 
+    // The users can verfy their humanity.
+    function verifyHumanity() external;
+
+    // The users can get their humanity is verified or not.
+    function isHumanityVerified(
+        address address_
+    ) external view returns (bool);
 }

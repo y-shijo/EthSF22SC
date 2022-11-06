@@ -12,6 +12,9 @@ contract TheGreeting is
     ICampaign[] campaigns;
     mapping(ICampaign => bool) isCampaignRegistered;
 
+    // To check whether the address is verified as `having humanity`
+    mapping(address => bool) verifiedHumanity;
+
     // For PUSH Protocol Integration
     address public pushCommContractAddress  = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
     address public theGreetingChannelOnPush = address(0);
@@ -115,6 +118,19 @@ contract TheGreeting is
         isCampaignRegistered[campaign_] = true;
 
         campaigns.push(ICampaign(campaign_));
+    }
+
+    // The users can verify their humanity.
+    // TODO: [Future Work] This function must implement some authentication logic to restrict who can call this function. Hopefully, WorldID verification contract will be deployed to Ethereum, then we can verify onchain.
+    function verifyHumanity() external override {
+        verifiedHumanity[msg.sender] = true;
+    }
+
+    // The users can get their humanity is verified or not.
+    function isHumanityVerified(
+        address address_
+    ) external view override returns (bool) {
+        return verifiedHumanity[address_];
     }
 
 
