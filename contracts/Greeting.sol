@@ -3,6 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./interfaces/IGreeting.sol";
 import "./interfaces/ICampaign.sol";
+import "./interfaces/IPUSHCommInterface.sol";
 
 contract TheGreeting is 
     IGreeting
@@ -11,6 +12,9 @@ contract TheGreeting is
     ICampaign[] campaigns;
     mapping(ICampaign => bool) isCampaignRegistered;
 
+    // For PUSH Protocol Integration
+    address public pushCommContractAddress  = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
+    address public theGreetingChannelOnPush = address(0);
 
     // The user can get a list of available campaigns.
     function getCampaignList() external view override returns (ICampaign[] memory) {
@@ -76,6 +80,10 @@ contract TheGreeting is
         campaign.send(msg.sender, to, messageURI);
 
         // TODO: Integrate PUSH Protocol to send notification to the recipient
+        _sendNotificationViaPush(to,
+                                campaign.name(), 
+                                "New greeting coming!"
+                                );
     }
 
     // The user can get message IDs of Campaign
@@ -109,4 +117,42 @@ contract TheGreeting is
 
         campaigns.push(ICampaign(campaign_));
     }
+
+
+    // ------- PUSH Utilities ------- 
+    // Set PUSH Comm Contract Address
+    function setPushCommContractAddr(address addr_) external {
+        pushCommContractAddress = addr_;
+    }
+
+    // Set Channel Address On PUSH Protocol
+    function setChannelAddrOnPush(address addr_) external {
+        theGreetingChannelOnPush = addr_;
+    }
+
+    // Send Notification message via Push Protocol
+    function _sendNotificationViaPush(
+        address recipient,
+        string memory title,
+        string memory body) internal
+    {
+        IPUSHCommInterface(pushCommContractAddress).sendNotification(
+            theGreetingChannelOnPush, // PUSH Channel Address
+            recipient,              // Recipient Address 
+            bytes(                    // Identity (Notification Body)
+                string(
+                    abi.encodePacked(
+                        "0", // From Smart contract
+                        "+", // segregator
+                        "3", // Targetted Message
+                        "+", // segregator
+                        title, // Notificaiton title
+                        "+", // segregator
+                        body // notification body
+                    )
+                )
+            )
+        );
+    }
+
 }
