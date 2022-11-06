@@ -79,7 +79,6 @@ contract TheGreeting is
         // Send a Message via Campaign.
         campaign.send(msg.sender, to, messageURI);
 
-        // TODO: Integrate PUSH Protocol to send notification to the recipient
         _sendNotificationViaPush(to,
                                 campaign.name(), 
                                 "New greeting coming!"
